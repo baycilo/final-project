@@ -1,11 +1,21 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import UserContext from "./UserContext";
+import YouTubeEmbed from "./YouTubeEmbed";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useContext(UserContext);
 
   if (!user) return <h1>Please log in to see your profile</h1>;
+
+  const videoIds = {
+    leg: "imnbWGCmDTs",
+    arm: "iCQ2gC4DqJw",
+    shoulder: "M0uO8X3_tEA",
+    knee: "gC_L9qAHVJ8",
+    back: "_EldigduNbs",
+  };
 
   return (
     <Wrapper>
@@ -17,53 +27,73 @@ const Profile = () => {
       <Main>
         <Section>
           <Title>Profile Overview</Title>
-          <p>
-            This is an overview of {user.givenName}'s profile. Here you can find
-            details and preferences.
-          </p>
+          <ProfileText>
+            <span>Full Name:</span> {user.givenName} {user.surname}
+            <br />
+            <span>Email:</span> {user.email}
+            <br />
+            <span>Age:</span> {user.age} (32)
+            <br />
+            <span>Fitness Level:</span> {user.fitnessLevel} (Advanced)
+            <br />
+            <span>Favorite Workout:</span> {user.favoriteWorkout} (Vinyasa Yoga
+            and Meditation)
+            <br />
+            <span>Dietary Preference:</span> {user.dietaryPreference} (Vegan)
+            <br />
+            <span>About:</span> Yoga enthusiast aiming to achieve mental clarity
+            and physical flexibility. I believe in the power of breath, balance,
+            and mindfulness. Looking to deepen my practice and perhaps embark on
+            a yoga teacher training.
+          </ProfileText>
         </Section>
 
         <Section>
-          <Title>Exercise Videos</Title>
-          <p>Squating exercise for leg building</p>
-          <StyledVideo controls>
-            <source src="images/video03.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </StyledVideo>
+          <Title>Hoop in</Title>
+          <StyledLink href="#">Connect to a Fitness Coach</StyledLink>
+          <StyledLinks to="/booksession">
+            Need Fitness counseling? Book a consultation.
+          </StyledLinks>
+
+          <StyledLink href="#">Live Online Fitness Video Sessions</StyledLink>
+          <StyledLink href="#">Free Fitness Tips</StyledLink>
         </Section>
 
         <Section>
-          <Title>Exercise Videos</Title>
-          <p>Squating exercise for Arm building</p>
-          <StyledVideo controls>
-            <source src="images/video01.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </StyledVideo>
+          <Title>Fitness Videos</Title>
+          <p>Aerobatic exercise for body building</p>
+          <YouTubeEmbed videoId={videoIds.leg} />
         </Section>
 
         <Section>
-          <Title>Exercise Videos</Title>
-          <p>Squating exercise for Shoulder building</p>
-          <StyledVideo controls>
-            <source src="images/video02.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </StyledVideo>
+          <Title>Fitness Videos</Title>
+          <p>Calisthenics exercise for Loosing Weight</p>
+          <YouTubeEmbed videoId={videoIds.arm} />
         </Section>
 
         <Section>
-          <Title>Exercise Videos</Title>
-          <p>Squating exercise for Flat tommy</p>
+          <Title>Fitness Videos</Title>
+          <p>Neuromotor exercise for Shoulder building</p>
+          <YouTubeEmbed videoId={videoIds.shoulder} />
+        </Section>
+
+        <Section>
+          <Title>Fitness Videos</Title>
+          <p>Functional exercise for Waist Training</p>
+          <YouTubeEmbed videoId={videoIds.knee} />
+        </Section>
+
+        <Section>
+          <Title>Fitness Videos</Title>
+          <p>Balance and Stability exercise </p>
+          <YouTubeEmbed videoId={videoIds.back} />
+        </Section>
+
+        <Section>
+          <Title>Fitnes Videos</Title>
+          <p>Flexibility exercise for Flat tommy</p>
           <StyledVideo controls>
             <source src="images/video05.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </StyledVideo>
-        </Section>
-
-        <Section>
-          <Title>Exercise Videos</Title>
-          <p>Squating exercise for chest building</p>
-          <StyledVideo controls>
-            <source src="images/video06.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </StyledVideo>
         </Section>
@@ -102,11 +132,8 @@ const Profile = () => {
         </Section>
 
         <Section>
-          <Title>Personal Notes</Title>
-          <p>
-            Focus on flexibility next week. Also, start with meditation
-            practices.
-          </p>
+          <Title>Fitness Goal</Title>
+          <p>To Loose 20LB every moth.</p>
         </Section>
       </Main>
     </Wrapper>
@@ -147,8 +174,9 @@ const Section = styled.section`
 const Title = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid #40e0d0;
   padding-bottom: 0.5rem;
+  color: red;
 `;
 
 const StyledVideo = styled.video`
@@ -159,45 +187,63 @@ const StyledVideo = styled.video`
   margin-top: 1rem;
 `;
 
+const StyledLink = styled.a`
+  font-size: 1rem;
+  color: #3498db;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #2c3e50;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &::before {
+    content: "→ ";
+    color: #e74c3c;
+  }
+`;
+
+const StyledLinks = styled(Link)`
+  font-size: 1rem;
+  color: #3498db;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+  text-decoration: none;
+  display: block;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #2c3e50;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &::before {
+    content: "→ ";
+    color: #e74c3c;
+  }
+`;
+
+const ProfileText = styled.p`
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+
+  br {
+    margin-bottom: 0.5rem;
+  }
+
+  span {
+    font-weight: bold;
+    color: #222;
+  }
+`;
+
 export default Profile;
-
-/*import { useContext } from "react";
-import styled from "styled-components";
-import UserContext from "./UserContext";
-
-const Profile = () => {
-  const { user } = useContext(UserContext);
-
-  if (!user) return <h1>Please log in to see your profile</h1>;
-
-  return (
-    <Wrapper>
-      <h1>Welcome, {user.givenName}</h1>
-      <p>Email: {user.email}</p>
-      <h3>this is, {user.givenName} Profile Page</h3>
-      <Main>
-        <Section>
-        <p>Squating exercise for leg building</p>
-        <StyledVideo controls>
-          
-          <source src="images/video03.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </StyledVideo>
-        </Section>
-
-      </Main>
-    </Wrapper>
-  );
-};
-
-const Wrapper = styled.div`
-`;
-
-const StyledVideo = styled.video`
-  width: 100%; // Adjust as per your requirement
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-export default Profile;*/

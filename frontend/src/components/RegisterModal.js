@@ -6,7 +6,7 @@ const RegisterModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
   return (
     <Modal onClose={onClose}>
-      <p>Register to have access</p>
+      <h4>Register to have access</h4>
       <RegisterForm onRegister={onClose} />
     </Modal>
   );

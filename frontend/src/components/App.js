@@ -12,10 +12,16 @@ import Contact from "./Contact";
 import About from "./About";
 import Profile from "./Profile";
 import UserProvider from "./UserProvider";
+import BookSession from "./BookSession";
+import Confirmation from "./Confirmation";
 
 const AppContent = () => {
   const navigate = useNavigate();
   const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") === "true"
+  );
+
   const [isRegisterOpen, setRegisterOpen] = useState(false);
 
   const handleSuccessfulAuth = () => {
@@ -40,6 +46,8 @@ const AppContent = () => {
 
       <AppWrapper>
         <Header
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
           onLoginClick={() => {
             setLoginOpen(true);
           }}
@@ -55,6 +63,8 @@ const AppContent = () => {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/footer" element={<Footer />} />
+            <Route path="/confirmation" element={<Confirmation />} />
+            <Route path="/booksession" element={<BookSession />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<h1>404: Oops!</h1>} />
           </Routes>
@@ -98,104 +108,17 @@ const AppWrapper = styled.div`
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  max-width: 1200px; // Max width to ensure content doesn't stretch too much on large screens.
-  margin: 0 auto; // Center the app content on larger screens.
+  max-width: 1200px;
+  margin: 0 auto;
 `;
 
 const Main = styled.div`
   flex: 1;
-  background-color: green;
-  padding: 0rem; // Give the content inside some space.
+  background-color: ;
+  padding: 0rem;
   @media (max-width: 768px) {
-    padding: 0; // Reduce padding for smaller screens.
+    padding: 0;
   }
 `;
 
 export default App;
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-/*import styled from "styled-components";
-import { useState } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
-import Modal from "./Modal";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
-import HomePage from "./HomePage";
-import Footer from "./Footer";
-import Header from "./Header";
-import Contact from "./Contact";
-import About from "./About";
-import Profile from "./Profile";
-
-const AppContent = () => {
-  const navigate = useNavigate();
-  const [isLoginOpen, setLoginOpen] = useState(false);
-  const [isRegisterOpen, setRegisterOpen] = useState(false);
-
-  const handleSuccessfulAuth = () => {
-    setLoginOpen(false);
-    setRegisterOpen(false);
-    navigate("/profile");
-  };
-
-  return (
-    <>
-      {isLoginOpen && (
-        <Modal onClose={() => setLoginOpen(false)}>
-          <LoginForm onLogin={handleSuccessfulAuth} />
-        </Modal>
-      )}
-
-      {isRegisterOpen && (
-        <Modal onClose={() => setRegisterOpen(false)}>
-          <RegisterForm onRegister={handleSuccessfulAuth} />
-        </Modal>
-      )}
-
-      <AppWrapper>
-        <Header
-          onLoginClick={() => {
-            setLoginOpen(true);
-          }}
-          onRegisterClick={() => {
-            setRegisterOpen(true);
-          }}
-        />
-
-        <Main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/header" element={<Header />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/footer" element={<Footer />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="*" element={<h1>404: Oops!</h1>} />
-          </Routes>
-        </Main>
-        <Footer />
-      </AppWrapper>
-    </>
-  );
-};
-
-const App = () => {
-  return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
-  );
-};
-
-const AppWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`;
-
-const Main = styled.div`
-  flex: 1;
-  background-color: green;
-`;
-
-export default App;*/

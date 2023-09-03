@@ -7,32 +7,55 @@ const ModalWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; // Ensure this value is higher than the z-index of any other overlapped element
+  background-image: url("/images/image03.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 1000;
 `;
 
 const ModalContent = styled.div`
-  background-color: #f5f5f5;
+  background-color: #40e0d0;
   padding: 20px;
   margin: 20px;
   width: 400px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledInput = styled.input`
   width: 100%;
   padding: 10px;
-  margin: 10px 0; // Add margin to create space between inputs
+  margin: 10px 0;
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 1rem;
   &:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+`;
+
+const Button = styled.button`
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 10px 0;
+
+  &:hover {
+    background-color: #0056b3;
   }
 `;
 
@@ -47,4 +70,4 @@ const Modal = ({ children, onClose }) => {
 };
 
 export default Modal;
-export { StyledInput };
+export { StyledInput, Button };
